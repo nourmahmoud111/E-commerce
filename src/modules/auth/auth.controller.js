@@ -40,7 +40,7 @@ const changeUserPassword =catchError(async (req, res, next) => {
 } )
 
 
-//verifying token
+//verifying token alternative
 const protectedRoutes =catchError(async (req, res, next) => {
    let {token} = req.headers
    let userPayload = null
@@ -63,7 +63,7 @@ const protectedRoutes =catchError(async (req, res, next) => {
 } )
 
 
-
+//roles = ['user','admin','manager']
 const allowedTo = (...roles)=>{
         return catchError(async (req, res, next) => {
         if(roles.includes(req.user.role))
