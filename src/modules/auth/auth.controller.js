@@ -39,11 +39,13 @@ const changeUserPassword =catchError(async (req, res, next) => {
         next(new appERROR('incorrect email or password', 401))
 } )
 
+
+//verifying token
 const protectedRoutes =catchError(async (req, res, next) => {
    let {token} = req.headers
    let userPayload = null
    if (!token) return next(new appERROR('token not provided', 401)) 
-    jwt.verify(token ,'ahmed',(err,payload)=>{
+    jwt.verify(token, process.env.JWT_KEY, (err, payload) => {
         if(err) return next(new appERROR(err,401))
             userPayload = payload
     })
